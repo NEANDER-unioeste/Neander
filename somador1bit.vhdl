@@ -5,13 +5,11 @@ use ieee.numeric_std.all;
 entity somador_1bit is
 
     port(
-
         canal_a : in std_logic;
         canal_b : in std_logic;
         canal_cin : in std_logic;
         canal_cout : out std_logic;
         saida_soma : out std_logic
-
     );
 
 end entity;

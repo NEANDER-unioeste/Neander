@@ -2,37 +2,28 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity somador_12bits is
-
+entity opADD is
     port(
-
-        canal_x : in std_logic_vector(11 downto 0);
-        canal_y : in std_logic_vector(11 downto 0);
+        canal_x : in std_logic_vector(7 downto 0);
+        canal_y : in std_logic_vector(7 downto 0);
         canal_cinn : in std_logic;
         canal_coutt : out std_logic;
-        saida_somaa : out std_logic_vector(11 downto 0)
-
+        saida_somaa : out std_logic_vector(7 downto 0)
     );
-
 end;
    
-architecture somando_12bits of somador_12bits is
-
+architecture somador_8bits of opADD is
     component somador_1bit
-        
         port(
-
             canal_a : in std_logic;
             canal_b : in std_logic;
             canal_cin : in std_logic;
             canal_cout : out std_logic;
             saida_soma : out std_logic
-
         );
-
     end component;
         
-    signal aux : std_logic_vector(11 downto 0);
+    signal aux : std_logic_vector(7 downto 0);
 
 begin
 
@@ -44,10 +35,6 @@ begin
     u_somador6 : somador_1bit port map(canal_a => canal_x(5), canal_b => canal_y(5), canal_cin => aux(4), canal_cout => aux(5), saida_soma => saida_somaa(5));
     u_somador7 : somador_1bit port map(canal_a => canal_x(6), canal_b => canal_y(6), canal_cin => aux(5), canal_cout => aux(6), saida_soma => saida_somaa(6));
     u_somador8 : somador_1bit port map(canal_a => canal_x(7), canal_b => canal_y(7), canal_cin => aux(6), canal_cout => aux(7), saida_soma => saida_somaa(7));
-    u_somador9 : somador_1bit port map(canal_a => canal_x(8), canal_b => canal_y(8), canal_cin => aux(7), canal_cout => aux(8), saida_soma => saida_somaa(8));
-    u_somador10 : somador_1bit port map(canal_a => canal_x(9), canal_b => canal_y(9), canal_cin => aux(8), canal_cout => aux(9), saida_soma => saida_somaa(9));
-    u_somador11 : somador_1bit port map(canal_a => canal_x(10), canal_b => canal_y(10), canal_cin => aux(9), canal_cout => aux(10), saida_soma => saida_somaa(10));
-    u_somador12 : somador_1bit port map(canal_a => canal_x(11), canal_b => canal_y(11), canal_cin => aux(10), canal_cout => aux(11), saida_soma => saida_somaa(11));
-    canal_coutt <= aux(10) xor aux(11);
+    canal_coutt <= aux(6) xor aux(7);
 
 end architecture;
