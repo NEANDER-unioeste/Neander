@@ -1,14 +1,15 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity ffD is
+entity reg_Carga_1bit is
     port(
         d        : in  std_logic;
         clk      : in  std_logic;
         cl, pr   : in  std_logic;
         q, nq    : out std_logic
     );
-end ffD;
+end reg_Carga_1bit;
+
 architecture ff of ffD is
     signal s_snj,  s_snk   : std_logic;
     signal s_sns,  s_snr   : std_logic;

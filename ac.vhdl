@@ -1,5 +1,3 @@
---registrador com carga de 8 bits
---usando 8 reg de 1 bit
 library ieee;
 use ieee.std_logic_1164.all;
 
