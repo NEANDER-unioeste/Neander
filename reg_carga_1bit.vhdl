@@ -6,38 +6,34 @@ entity reg_Carga_1bit is
         d        : in  std_logic;
         clk      : in  std_logic;
         cl, pr   : in  std_logic;
-        q, nq    : out std_logic
-    );
+        nrw      : in  std_logic;
+        s        : out std_logic
+    ); 
 end reg_Carga_1bit;
 
-architecture ff of ffD is
-    signal s_snj,  s_snk   : std_logic;
-    signal s_sns,  s_snr   : std_logic;
-    signal s_sns2, s_snr2  : std_logic;
-    signal s_eloS, s_eloR  : std_logic;
-    signal s_eloQ, s_elonQ : std_logic;
-    signal s_nClock        : std_logic;
-begin
-    
-    q  <= not(pr and s_sns2 and s_elonQ);
-    nq <= not(cl and s_snr2 and s_eloQ);
+architecture reg1_1bit of reg_Carga_1bit is
+    component ffd is
+        port(
+            d      : in std_logic;
+            clk    : in std_logic;
+            pr, cl : in std_logic;
+            q, nq  : out std_logic
+        );
+    end component;
+    component mux2x1 is 
+    port(
+        a, b, sel in std_logic;
+        s out std_logic
+    );
 
-    s_nClock <= not(clk);
-    
-    s_snj <= not(d and clk and s_elonQ);
-    s_snk <= not(not d and clk and s_eloQ);
-    
-    s_sns <= not(pr and s_snj and s_eloR);
-    s_snr <= not(cl and s_snk and s_eloS);
-    
-    s_sns2 <= s_sns nand s_nClock;
-    s_snr2 <= s_snr nand s_nClock;
-    
-    s_eloS <= s_sns; 
-    s_eloR <= s_snr;
-    
-    s_eloQ  <= not(pr and s_sns2 and s_elonQ);
-    s_elonQ <= not(cl and s_snr2 and s_eloQ);
-    
+    end component;
+
+    signal datain, dataout : std_logic; 
+
+begin
+    s <= dataout;
+    u_mux : mux2x1 port map(dataout, d, nrw, datain);
+    u_reg : ffd port map(datain, clk, pr, cl, dataout);
+  
 
 end architecture;

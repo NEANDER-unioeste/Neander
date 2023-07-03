@@ -7,7 +7,7 @@ entity ffjk is
         clk    : in std_logic;
         pr, cl : in std_logic;
         q, nq  : out std_logic
-    );
+    ); 
 end entity;
 
 architecture latch of ffjk is

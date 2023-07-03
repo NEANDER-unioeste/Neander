@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity somador_1bit is
+entity somador_1bit is 
 
     port(
         canal_a : in std_logic;
