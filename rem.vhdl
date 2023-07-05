@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity RED_mar is 
+entity rem is 
     port(
         end_in  : in std_logic_vector(7 downto 0);
         clk     : in std_logic;
@@ -27,9 +27,7 @@ begin
 
     -- instâncias de regCarga1bit (8 vezes)
     u_reg0 : regCarga1bit port map(end_in => end_in(0), end_out => end_out(0), clk => clk, pr => pr, cl => cl, nrw => nrw);
-    
     u_reg1 : regCarga1bit port map(end_in => end_in(1), end_out => end_out(1), clk => clk, pr => pr, cl => cl, nrw => nrw);   
-
     u_reg2 : regCarga1bit port map(end_in => end_in(2), end_out => end_out(2), clk => clk, pr => pr, cl => cl, nrw => nrw);   
     u_reg3 : regCarga1bit port map(end_in => end_in(3), end_out => end_out(3), clk => clk, pr => pr, cl => cl, nrw => nrw);
     u_reg4 : regCarga1bit port map(end_in => end_in(4), end_out => end_out(4), clk => clk, pr => pr, cl => cl, nrw => nrw);

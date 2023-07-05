@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity RDM_mbr is 
+entity rdm is 
     port(
         data_in      : in std_logic_vector(7 downto 0);
         clk    : in std_logic;
@@ -11,7 +11,7 @@ entity RDM_mbr is
     );
 end entity;                                                                                                                                                                                                                                                                                                                                                                                                                                 
 
-architecture regCarga of RDM_mbr is                                                     
+architecture regCarga of rdm is                                                     
 
     component regCarga1bit is
         port(
