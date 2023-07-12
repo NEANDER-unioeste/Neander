@@ -7,7 +7,7 @@ entity ulinha is
         x, y   : in std_logic_vector(7 downto 0);
         ulaOp  : in std_logic_vector(2 downto 0);
         s_ula  : out std_logic_vector(7 downto 0);
-        nz     : out std_logic_vector(1 downto 0)
+        ULAnz     : out std_logic_vector(1 downto 0)
     );
 end entity; 
 
@@ -51,7 +51,7 @@ begin
     s_or  <=  x or y;
     s_ula <= s_resultado;
 
-    u_nz  : nz     port map(s_resultado, nz);
+    u_nz  : nz     port map(s_resultado, ULAnz);
     u_ula : mux5x8 port map(s_not, s_and, s_or, s_add, y, ulaOp, s_resultado);
 
 end architecture;
