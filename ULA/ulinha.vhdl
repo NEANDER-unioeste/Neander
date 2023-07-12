@@ -52,6 +52,6 @@ begin
     s_ula <= s_resultado;
 
     u_nz  : nz     port map(s_resultado, nz);
-    u_ula : mux5x8 port map(s_not, s_and, s_or, s_add, y, ula0p, s_resultado);
+    u_ula : mux5x8 port map(s_not, s_and, s_or, s_add, y, ulaOp, s_resultado);
 
 end architecture;
