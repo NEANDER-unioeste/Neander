@@ -17,11 +17,11 @@ end mux5x8;
 architecture mux of mux5x8 is 
 begin
     
-    s <= i000 when sel = "000";
-    s <= i001 when sel = "001";
-    s <= i010 when sel = "010";
-    s <= i011 when sel = "011";
-    s <= i100 when sel = "100";
+    s <= i000 when sel = "000"; --LDA
+    s <= i001 when sel = "001"; --ADD
+    s <= i010 when sel = "010"; --OR
+    s <= i011 when sel = "011"; --AND
+    s <= i100 when sel = "100"; --NOT
 
 end mux;
 
