@@ -4,7 +4,7 @@
 -- Interfaces observadas : flags_nz e barramento
 
 ----------------------------------------------------------------------------
--- IMPORTANTE: é necessário trocar o "component" para o SEU MÓDULO ULA!!!!!!
+-- IMPORTANTE: e necessario trocar o "component" para o SEU MODULO ULA!!!!!!
 -- Linhas 33 e 56 <=========================================================
 ----------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ end entity tb_moduloULA;
 architecture quickmath of tb_moduloULA is
     constant cicloClock : time := 20 ns;
 
-    -- ATENÇÃO: trocar para o SEU módulo ULA <==================================================
+    -- ATENCAO: trocar para o SEU modulo ULA <==================================================
     -- pois os nomes e ordens das interfaces podem ser diferentes
     -- porém, a quantidade DEVE ser a mesma, senão, algo está errado
     component moduloULA is
@@ -53,7 +53,7 @@ architecture quickmath of tb_moduloULA is
     signal sbarramento : std_logic_vector(7 downto 0);
 
 begin
-    -- ATENÇÃO: ordenar para o SEU módulo ULA <=================================================
+    -- ATENCAO: ordenar para o SEU modulo ULA <=================================================
     superula : moduloULA port map(
         srst, sclk, 
         sAC_nrw,
@@ -129,7 +129,7 @@ begin
         -- STA
             sula_op <= "000";     -- ula_op é indiferente, padrão LDA
             sbarramento <= (others => 'Z'); -- valor no barramento DEVE SER "ZZZZZZZZ", senão gerará "XXXXXXXX"
-            sMEM_nrw <= '1';      -- memória em GRAVAÇÃO
+            sMEM_nrw <= '1';      -- memória em GRAVACAO
             sAC_nrw <= '0';       -- AC em modo leitura
             wait for cicloClock;    -- 140 ns
             
@@ -141,7 +141,7 @@ begin
         wait;
     end process;
 
-    -- PROCESSO DE VERIFICAÇÃO
+    -- PROCESSO DE VERIFICACAO
     -- durante as subidas do clock
     process
     begin

@@ -17,18 +17,8 @@ entity memoria is
 end entity;
 
 architecture mem of memoria is  
-    
-    component rem is 
-        port(
-            end_in  : in std_logic_vector(7 downto 0);
-            clk     : in std_logic;
-            pr, cl  : in std_logic;
-            nrw     : in std_logic;
-            end_out : out std_logic_vector(7 downto 0)
-        );
-    end component;
 
-    component rdm is 
+    component reg_Carga_8bit is 
         port(
             data_in  : in std_logic_vector(7 downto 0);
             clk      : in std_logic;
@@ -36,7 +26,7 @@ architecture mem of memoria is
             nrw      : in std_logic;
             data_out : out std_logic_vector(7 downto 0)
         );
-    end component; 
+    end component;  
 
     component as_ram is
         port(
@@ -57,6 +47,7 @@ architecture mem of memoria is
         s_mux2rem <= end_PC when nbarr_PC = '1' else end_Barr;
        
         u_mem : as_ram port map(s_rem2mem, s_mem2rdm, mem_rw, cl);
-        u_rem : rem port map(s_mux2rem, clk, '1', cl, rem_rw,s_rem2mem);
-        u_rdm : rdm port map(s_mem2rdm, clk, '1', cl, rdm_rw, s_rdm2barr);
+        u_rem : reg_Carga_8bit port map(s_mux2rem, clk, '1', cl, rem_rw,s_rem2mem);
+        u_rdm : reg_Carga_8bit port map(s_mem2rdm, clk, '1', cl, rdm_rw, s_rdm2barr);
+
 end architecture;
