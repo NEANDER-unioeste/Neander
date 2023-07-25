@@ -31,7 +31,7 @@ architecture reg1_1bit of reg_Carga_1bit is
 
     end component;
 
-    signal datain, dataout : std_logic; 
+    signal datain, dataout: std_logic; 
 
 begin
     s <= dataout;
@@ -68,11 +68,14 @@ architecture regCarga2bit of reg_Carga_2bit is
         );
     end component;
 
+    signal Entrada: std_logic_vector(1 downto 0);
+
 begin
 
     -- instâncias de regCarga1bit (2 vezes)
-    u_reg0 : regCarga1bit port map(d => d(0), s => s(0), clk => clk, pr => pr, cl => cl, nrw => nrw);
-    u_reg1 : regCarga1bit port map(d => d(1), s => s(1), clk => clk, pr => pr, cl => cl, nrw => nrw);   
+
+    u_reg0 : regCarga1bit port map(Entrada(0), clk, pr, cl, nrw, s(0));
+    u_reg1 : regCarga1bit port map(Entrada(1), clk, pr, cl, nrw, s(1));   
 
 end architecture;
 
@@ -104,17 +107,20 @@ architecture regCarga of reg_Carga_8bit is
         );
     end component;
 
+    signal Entrada: std_logic_vector(7 downto 0);
+
 begin
 
     -- instâncias de regCarga1bit (8 vezes)
-    u_reg0 : regCarga1bit port map(data_in(0), clk, pr, cl, nrw, data_out(0));
-    u_reg1 : regCarga1bit port map(data_in(1), clk, pr, cl, nrw, data_out(1));   
-    u_reg2 : regCarga1bit port map(data_in(2), clk, pr, cl, nrw, data_out(2));   
-    u_reg3 : regCarga1bit port map(data_in(3), clk, pr, cl, nrw, data_out(3));
-    u_reg4 : regCarga1bit port map(data_in(4), clk, pr, cl, nrw, data_out(4));
-    u_reg5 : regCarga1bit port map(data_in(5), clk, pr, cl, nrw, data_out(5));
-    u_reg6 : regCarga1bit port map(data_in(6), clk, pr, cl, nrw, data_out(6));
-    u_reg7 : regCarga1bit port map(data_in(7), clk, pr, cl, nrw, data_out(7));       
+    Entrada <= data_in;
+    u_reg0 : regCarga1bit port map(Entrada(0), clk, pr, cl, nrw, data_out(0));
+    u_reg1 : regCarga1bit port map(Entrada(1), clk, pr, cl, nrw, data_out(1));   
+    u_reg2 : regCarga1bit port map(Entrada(2), clk, pr, cl, nrw, data_out(2));   
+    u_reg3 : regCarga1bit port map(Entrada(3), clk, pr, cl, nrw, data_out(3));
+    u_reg4 : regCarga1bit port map(Entrada(4), clk, pr, cl, nrw, data_out(4));
+    u_reg5 : regCarga1bit port map(Entrada(5), clk, pr, cl, nrw, data_out(5));
+    u_reg6 : regCarga1bit port map(Entrada(6), clk, pr, cl, nrw, data_out(6));
+    u_reg7 : regCarga1bit port map(Entrada(7), clk, pr, cl, nrw, data_out(7));       
     
 
 

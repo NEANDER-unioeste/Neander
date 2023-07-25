@@ -42,7 +42,8 @@ architecture ula of ulinha is
         );
     end component;
 
-    signal s_not, s_and, s_or, s_add, s_resultado: std_logic_vector(7 downto 0);
+    signal s_not, s_and, s_or, s_add, s_resultado, s_opADD_saida: std_logic_vector(7 downto 0);
+    signal s_opADD_cin, s_opADD_cout: std_logic;
 
 begin
 
@@ -53,5 +54,6 @@ begin
 
     u_nz  : nz     port map(s_resultado, ULAnz);
     u_ula : mux5x8 port map(s_not, s_and, s_or, s_add, y, ulaOp, s_resultado);
+    u_add : opADD port map(x, y, s_opADD_cin, s_opADD_cout, s_opADD_saida);
 
 end architecture;

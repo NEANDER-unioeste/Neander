@@ -17,11 +17,11 @@ architecture ulona of ULA is
     
     component reg_Carga_8bit is 
         port(
-            d      : in std_logic_vector(7 downto 0);
-            clk    : in std_logic;
-            pr, cl : in std_logic;
-            nrw    : in std_logic;
-            s      : out std_logic_vector(7 downto 0)
+            data_in  : in std_logic_vector(7 downto 0);
+            clk      : in std_logic;
+            pr, cl   : in std_logic;
+            nrw      : in std_logic;
+            data_out : out std_logic_vector(7 downto 0)
         );
     end component;
 
@@ -40,7 +40,7 @@ architecture ulona of ULA is
             x, y   : in std_logic_vector(7 downto 0);
             ulaOp  : in std_logic_vector(2 downto 0);
             s_ula  : out std_logic_vector(7 downto 0);
-            nz     : out std_logic_vector(1 downto 0)
+            ULAnz  : out std_logic_vector(1 downto 0)
         );
     end component; 
 

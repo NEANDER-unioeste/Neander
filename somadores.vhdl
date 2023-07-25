@@ -55,14 +55,14 @@ architecture somador_8bits of opADD is
 
 begin
 
-    u_somador1 : somador_1bit port map(canal_a => canal_x(0), canal_b => canal_y(0), canal_cin => canal_cinn, canal_cout => aux(0), saida_soma => saida_somaa(0));
-    u_somador2 : somador_1bit port map(canal_a => canal_x(1), canal_b => canal_y(1), canal_cin => aux(0), canal_cout => aux(1), saida_soma => saida_somaa(1));
-    u_somador3 : somador_1bit port map(canal_a => canal_x(2), canal_b => canal_y(2), canal_cin => aux(1), canal_cout => aux(2), saida_soma => saida_somaa(2));
-    u_somador4 : somador_1bit port map(canal_a => canal_x(3), canal_b => canal_y(3), canal_cin => aux(2), canal_cout => aux(3), saida_soma => saida_somaa(3));
-    u_somador5 : somador_1bit port map(canal_a => canal_x(4), canal_b => canal_y(4), canal_cin => aux(3), canal_cout => aux(4), saida_soma => saida_somaa(4));
-    u_somador6 : somador_1bit port map(canal_a => canal_x(5), canal_b => canal_y(5), canal_cin => aux(4), canal_cout => aux(5), saida_soma => saida_somaa(5));
-    u_somador7 : somador_1bit port map(canal_a => canal_x(6), canal_b => canal_y(6), canal_cin => aux(5), canal_cout => aux(6), saida_soma => saida_somaa(6));
-    u_somador8 : somador_1bit port map(canal_a => canal_x(7), canal_b => canal_y(7), canal_cin => aux(6), canal_cout => aux(7), saida_soma => saida_somaa(7));
+    u_somador1 : somador_1bit port map(canal_x(0), canal_y(0), canal_cinn, aux(0), saida_somaa(0));
+    u_somador2 : somador_1bit port map(canal_x(1), canal_y(1), aux(0), aux(1), saida_somaa(1));
+    u_somador3 : somador_1bit port map(canal_x(2), canal_y(2), aux(1), aux(2), saida_somaa(2));
+    u_somador4 : somador_1bit port map(canal_x(3), canal_y(3), aux(2), aux(3), saida_somaa(3));
+    u_somador5 : somador_1bit port map(canal_x(4), canal_y(4), aux(3), aux(4), saida_somaa(4));
+    u_somador6 : somador_1bit port map(canal_x(5), canal_y(5), aux(4), aux(5), saida_somaa(5));
+    u_somador7 : somador_1bit port map(canal_x(6), canal_y(6), aux(5), aux(6), saida_somaa(6));
+    u_somador8 : somador_1bit port map(canal_x(7), canal_y(7), aux(6), aux(7), saida_somaa(7));
     canal_coutt <= aux(6) xor aux(7);
 
 end architecture;
