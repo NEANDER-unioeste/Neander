@@ -1,11 +1,12 @@
 library ieee;
 use ieee.std_logic_1164.all;
-    
+
+--controle contador
 entity ctrl is
     port(
-    q : in  std_logic_vector(2 downto 0);
-    j : out std_logic_vector(2 downto 0);
-    k : out std_logic_vector(2 downto 0)
+        q : in  std_logic_vector(2 downto 0);
+        j : out std_logic_vector(2 downto 0);
+        k : out std_logic_vector(2 downto 0)
     );
 end entity;
 

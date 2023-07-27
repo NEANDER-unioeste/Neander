@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all; 
 
-entity controller is
+entity UCzao is
     port(
         barramento          : in std_logic_vector(7 downto 0);
         flagNZ              : in std_logic_vector(1 downto 0);
@@ -10,7 +10,7 @@ entity controller is
     );
 end entity;
 
-architecture controle_modulo of controller is
+architecture controle_modulo of UCzao is
     
     component reg_Carga_8bit is --RI
         port(
@@ -40,7 +40,7 @@ architecture controle_modulo of controller is
 
     signal ri2decodificador : std_logic_vector(7 downto 0);
     signal decodificador2uc : std_logic_vector(10 downto 0);
-
+    
     begin
 
     -- RI (reg carga 8 bits)

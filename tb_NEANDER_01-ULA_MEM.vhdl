@@ -49,7 +49,7 @@ architecture quickmath of tb_moduloULAMEM is
     -- pois os nomes e ordens das interfaces podem ser diferentes
     -- porém, a quantidade DEVE ser a mesma, senão, algo está errado
 
-    component memoria is 
+    component MEM is 
         port(
             interface_barramento : inout std_logic_vector(7 downto 0);
             end_PC               : in std_logic_vector(7 downto 0);
@@ -86,7 +86,7 @@ begin
      );
 
     -- ATENCAO: ordenar para o SEU módulo MEM <=================================================
-    supermem : memoria port map(
+    supermem : MEM port map(
          
         sbarramento,     -- é o barramento do sistema, o mesmo que inout da ULA
         send_PC,        -- entrada v ia PC (RIP) 

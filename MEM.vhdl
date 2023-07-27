@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity memoria is 
+entity MEM is 
     port(
         interface_barramento : inout std_logic_vector(7 downto 0);
         end_PC               : in std_logic_vector(7 downto 0);
@@ -16,7 +16,7 @@ entity memoria is
     );
 end entity;
 
-architecture mem of memoria is  
+architecture mem of MEM is  
 
     component reg_Carga_8bit is 
         port(
