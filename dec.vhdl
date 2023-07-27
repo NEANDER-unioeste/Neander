@@ -1,45 +1,27 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+library ieee;
+use ieee.std_logic_1164.all;
 
 entity decodificador is
     port(
-        entrada : std_logic_vector(7 downto 0);
-        NOP     : out std_logic;
-        zADD    : out std_logic;
-        STA     : out std_logic;
-        LDA     : out std_logic;
-        zOR     : out std_logic;
-        zAND    : out std_logic;
-        zNOT    : out std_logic;
-        JMP     : out std_logic;
-        JN      : out std_logic;
-        JZ      : out std_logic;
-        HLT     : out std_logic
+        instrIn  : in std_logic_vector(7 downto 0);
+        instrOut : out std_logic_vector(10 downto 0)
     );
 end entity;
 
-architecture dec of decodificador is
+architecture decodificar of decodificador is
+
 begin
-    NOP <= '1' when (entrada = "00000001") else '0';
 
-    STA <= '1' when (entrada = "00000010") else '0';
-    
-    LDA <= '1' when (entrada = "00000011") else '0';
+    instrOut <= "10000000000" when instrIn = "00000000" else
+                "01000000000" when instrIn = "00010000" else
+                "00100000000" when instrIn = "00100000" else
+                "00010000000" when instrIn = "00110000" else
+                "00001000000" when instrIn = "01000000" else
+                "00000100000" when instrIn = "01010000" else
+                "00000010000" when instrIn = "01100000" else
+                "00000001000" when instrIn = "10000000" else
+                "00000000100" when instrIn = "10010000" else
+                "00000000010" when instrIn = "10100000" else
+                "00000000001" when instrIn = "11110000" else (others => 'Z');
 
-    zADD <= '1' when (entrada = "00000100") else '0';
-
-    zOR  <= '1' when (entrada = "00000101") else '0';
-
-    zAND <= '1' when (entrada = "00000110") else '0';
-
-    zNOT <= '1' when (entrada = "00000111") else '0';
-
-    JMP <= '1' when (entrada = "00001000") else '0';
-
-    JN  <= '1' when (entrada = "00001001") else '0';
-
-    JZ  <= '1' when (entrada = "00001010") else '0';
-
-    HLT <= '1' when (entrada = "00001011") else '0';
 end architecture;

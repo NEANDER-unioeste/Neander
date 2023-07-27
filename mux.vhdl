@@ -16,8 +16,7 @@ architecture operacao of mux2x1 is
 
 begin
 
-    s <= a when sel = '0';
-    s <= b when sel = '1';
+    s <= a when sel = '0' else b;
 
 end operacao;
 
@@ -65,10 +64,10 @@ end mux5x8;
 architecture mux of mux5x8 is 
 begin
     
-    s <= i000 when sel = "000"; --LDA
-    s <= i001 when sel = "001"; --ADD
-    s <= i010 when sel = "010"; --OR
-    s <= i011 when sel = "011"; --AND
-    s <= i100 when sel = "100"; --NOT
+    s <= i000 when sel = "000" else  --LDA
+     i001 when sel = "001" else --ADD
+     i010 when sel = "010" else --OR
+     i011 when sel = "011" else --AND
+     i100 when sel = "100"; --NOT
 
 end mux;

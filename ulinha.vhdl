@@ -7,7 +7,7 @@ entity ulinha is
         x, y   : in std_logic_vector(7 downto 0);
         ulaOp  : in std_logic_vector(2 downto 0);
         s_ula  : out std_logic_vector(7 downto 0);
-        ULAnz     : out std_logic_vector(1 downto 0)
+        ULAnz  : out std_logic_vector(1 downto 0)
     );
 end entity; 
 
@@ -18,8 +18,8 @@ architecture ula of ulinha is
             canal_x : in std_logic_vector(7 downto 0);
             canal_y : in std_logic_vector(7 downto 0);
             canal_cinn : in std_logic;
-            canal_coutt : out std_logic;
-            saida_somaa : out std_logic_vector(7 downto 0)
+            saida_somaa : out std_logic_vector(7 downto 0);
+            canal_coutt : out std_logic
         );
     end component;
 
@@ -42,8 +42,8 @@ architecture ula of ulinha is
         );
     end component;
 
-    signal s_not, s_and, s_or, s_add, s_resultado, s_opADD_saida: std_logic_vector(7 downto 0);
-    signal s_opADD_cin, s_opADD_cout: std_logic;
+    signal s_not, s_and, s_or, s_add, s_resultado : std_logic_vector(7 downto 0);
+
 
 begin
 
@@ -52,8 +52,8 @@ begin
     s_or  <=  x or y;
     s_ula <= s_resultado;
 
+    u_add : opADD port map(x, y, '0', s_add);
     u_nz  : nz     port map(s_resultado, ULAnz);
     u_ula : mux5x8 port map(s_not, s_and, s_or, s_add, y, ulaOp, s_resultado);
-    u_add : opADD port map(x, y, s_opADD_cin, s_opADD_cout, s_opADD_saida);
 
 end architecture;

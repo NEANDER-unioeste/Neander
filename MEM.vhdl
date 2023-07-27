@@ -37,6 +37,15 @@ architecture mem of memoria is
         );
     end component as_ram;
 
+    component mux2x8 is 
+    port(
+        x : in std_logic_vector(7 downto 0);
+        y : in std_logic_vector(7 downto 0);
+        sel  : in std_logic;
+        s    : out std_logic_vector(7 downto 0)
+    );
+    end component;
+
     signal s_mux2rem, s_rem2mem, s_mem2rdm , s_rdm2barr: std_logic_vector(7 downto 0); 
     
     begin
@@ -44,10 +53,10 @@ architecture mem of memoria is
         interface_barramento <= s_rdm2barr when mem_rw = '0' else (others => 'Z');
         s_mem2rdm <= interface_barramento when mem_rw = '1' else (others => 'Z');
 
-        s_mux2rem <= end_PC when nbarr_PC = '1' else end_Barr;
-       
-        u_mem : as_ram port map(s_rem2mem, s_mem2rdm, mem_rw, cl);
-        u_rem : reg_Carga_8bit port map(s_mux2rem, clk, '1', cl, rem_rw,s_rem2mem);
-        u_rdm : reg_Carga_8bit port map(s_mem2rdm, clk, '1', cl, rdm_rw, s_rdm2barr);
+        
+        u_mux2x8 : mux2x8 port map(end_Barr, end_PC, nbarr_PC, s_mux2rem);
+        u_mem    : as_ram port map(s_rem2mem, s_mem2rdm, mem_rw, cl);
+        u_rem    : reg_Carga_8bit port map(s_mux2rem, clk, '1', cl, rem_rw,s_rem2mem);
+        u_rdm    : reg_Carga_8bit port map(s_mem2rdm, clk, '1', cl, rdm_rw, s_rdm2barr);
 
 end architecture;

@@ -48,7 +48,8 @@ architecture ulona of ULA is
     signal s_ac2flags : std_logic_vector(1 downto 0);
 
     begin
-        barramento <= s_ac2ula when mem_rw ='1' else (others => 'Z');
+    
+    barramento <= s_ac2ula when mem_rw ='1' else (others => 'Z');
 
     u_ulinha    : ulinha port map(s_ac2ula, barramento, ula_op, s_ula2ac,s_ac2flags); 
     u_ac        : reg_Carga_8bit  port map(s_ula2ac, clk, '1', reset, AC_rw, s_ac2ula);

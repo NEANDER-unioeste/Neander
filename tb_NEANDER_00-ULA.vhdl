@@ -33,16 +33,16 @@ architecture quickmath of tb_moduloULA is
     -- ATENCAO: trocar para o SEU modulo ULA <==================================================
     -- pois os nomes e ordens das interfaces podem ser diferentes
     -- porém, a quantidade DEVE ser a mesma, senão, algo está errado
-    component moduloULA is
-	    port(
-            rst, clk    : in    std_logic;
-            AC_nrw      : in    std_logic;
-            ula_op      : in    std_logic_vector(2 downto 0);
-            MEM_nrw     : in    std_logic;
-            flags_nz    : out   std_logic_vector(1 downto 0);
-		    barramento  : inout std_logic_vector(7 downto 0)
-	    );
-    end component moduloULA;
+    component ULA is 
+        port(
+            barramento : inout std_logic_vector(7 downto 0);
+            mem_rw : in std_logic;
+            AC_rw : in std_logic;
+            ula_op : in std_logic_vector(2 downto 0);
+            reset, clk : in std_logic;
+            interface_flags : out std_logic_vector(1 downto 0)   
+        );
+    end component;
 
     -- Não é necessário alterar os sinais
     signal srst : std_logic := '0';
@@ -54,13 +54,13 @@ architecture quickmath of tb_moduloULA is
 
 begin
     -- ATENCAO: ordenar para o SEU modulo ULA <=================================================
-    superula : moduloULA port map(
-        srst, sclk, 
+    superula : ULA port map(
+        sbarramento,
+        sMEM_nrw,
         sAC_nrw,
         sula_op,
-        sMEM_nrw,
-        sflags_nz,
-        sbarramento
+        srst, sclk, 
+        sflags_nz
      );
 
 ----------------------------------------------------------------------------

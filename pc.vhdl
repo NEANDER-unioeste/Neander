@@ -1,38 +1,60 @@
-library ieee;
-use ieee.std_logic_1164.all;
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
 
-entity pc is 
+entity PC is
     port(
-        d      : in std_logic_vector(7 downto 0);
-        clk    : in std_logic;
-        pr, cl : in std_logic;
-        nrw    : in std_logic;
-        s      : out std_logic_vector(7 downto 0)
+        nbarr_inc            : in std_logic;
+        PC_rw                : in std_logic;
+        clk, cl              : in std_logic;
+        interface_barramento : inout std_logic_vector(7 downto 0);
+        saida                : out std_logic_vector(7 downto 0)
     );
 end entity;
 
-architecture regCarga of pc is
+architecture pc of PC is
 
-    component regCarga1bit is
+    component mux2x8 is 
         port(
-            d       : in  std_logic;
-            clk     : in  std_logic;
-            pr, cl  : in  std_logic;
-            nrw     : in  std_logic;
-            s       : out std_logic
+            x   : in std_logic_vector(7 downto 0);
+            y   : in std_logic_vector(7 downto 0);
+            sel : in std_logic;
+            s   : out std_logic_vector(7 downto 0)
         );
     end component;
 
-begin
+    component reg_Carga_8bit is 
+        port(
+            data_in  : in std_logic_vector(7 downto 0);
+            clk      : in std_logic;
+            pr, cl   : in std_logic;
+            nrw      : in std_logic;
+            data_out : out std_logic_vector(7 downto 0)
+        );
+    end component;
 
-    -- instâncias de regCarga1bit (8 vezes)
-    u_reg0 : regCarga1bit port map(d => d(0), s => s(0), clk => clk, pr => pr, cl => cl, nrw => nrw);
-    u_reg1 : regCarga1bit port map(d => d(1), s => s(1), clk => clk, pr => pr, cl => cl, nrw => nrw);   
-    u_reg2 : regCarga1bit port map(d => d(2), s => s(2), clk => clk, pr => pr, cl => cl, nrw => nrw);   
-    u_reg3 : regCarga1bit port map(d => d(3), s => s(3), clk => clk, pr => pr, cl => cl, nrw => nrw);
-    u_reg4 : regCarga1bit port map(d => d(4), s => s(4), clk => clk, pr => pr, cl => cl, nrw => nrw);
-    u_reg5 : regCarga1bit port map(d => d(5), s => s(5), clk => clk, pr => pr, cl => cl, nrw => nrw);
-    u_reg6 : regCarga1bit port map(d => d(6), s => s(6), clk => clk, pr => pr, cl => cl, nrw => nrw);
-    u_reg7 : regCarga1bit port map(d => d(7), s => s(7), clk => clk, pr => pr, cl => cl, nrw => nrw);       
+    component opADD is
+        port(
+            canal_x : in std_logic_vector(7 downto 0);
+            canal_y : in std_logic_vector(7 downto 0);
+            canal_cinn : in std_logic;
+            saida_somaa : out std_logic_vector(7 downto 0);
+            canal_coutt : out std_logic
+        );
+    end component;
 
-end architecture; 
+    signal s_mux2pc, sadd, s_PCatual :  std_logic_vector(7 downto 0);
+    signal s_cout: std_logic;
+
+    begin
+
+    
+
+    u_mux2x8 : mux2X8 port map(interface_barramento, sadd, nbarr_inc, s_mux2pc);
+    u_add    : opADD port map("00000001", s_PCatual, '0', sadd, s_cout);
+    u_pc     : reg_Carga_8bit port map(s_mux2pc, clk, '1', cl, PC_rw, s_PCatual);
+
+    saida <= s_PCatual;
+
+
+end architecture;

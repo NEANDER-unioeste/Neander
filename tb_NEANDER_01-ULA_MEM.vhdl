@@ -83,7 +83,6 @@ begin
         sula_op,
         srst, sclk, 
         sflags_nz
-        
      );
 
     -- ATENCAO: ordenar para o SEU módulo MEM <=================================================

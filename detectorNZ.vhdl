@@ -12,7 +12,7 @@ architecture detector of nz is
 
 begin
 
-  dnz (0)<= not(datain(7) or datain(6) or datain(5) or datain(4) or datain(3) or datain(2) or datain(1) or datain(0));
-  dnz (1)<= datain(7);
+  dnz(0) <= not(datain(7) or datain(6) or datain(5) or datain(4) or datain(3) or datain(2) or datain(1) or datain(0));
+  dnz(1) <= datain(7);
 
 end architecture ;
